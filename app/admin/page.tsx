@@ -1,10 +1,7 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Header from '../components/Header'
-import ProtectedRoute from '../components/ProtectedRoute'
 
 // ダミーの管理データ
 const dashboardStats = {
@@ -15,34 +12,7 @@ const dashboardStats = {
 }
 
 export default function AdminPage() {
-  const { data: session } = useSession()
-  const router = useRouter()
   const [activeTab, setActiveTab] = useState('dashboard')
-
-  useEffect(() => {
-    if (session && session.user.role !== 'admin') {
-      router.push('/dashboard')
-    }
-  }, [session, router])
-
-  if (!session || session.user.role !== 'admin') {
-    return (
-      <ProtectedRoute>
-        <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-800 mb-4">アクセス権限がありません</h1>
-            <p className="text-gray-600 mb-4">管理者のみアクセス可能です</p>
-            <button
-              onClick={() => router.push('/dashboard')}
-              className="salon-button"
-            >
-              ダッシュボードに戻る
-            </button>
-          </div>
-        </div>
-      </ProtectedRoute>
-    )
-  }
 
   const tabs = [
     { id: 'dashboard', label: 'ダッシュボード' },
@@ -52,9 +22,8 @@ export default function AdminPage() {
   ]
 
   return (
-    <ProtectedRoute>
-      <div className="min-h-screen bg-gray-50">
-        <Header />
+    <div className="min-h-screen bg-gray-50">
+      <Header />
         
         <main className="container mx-auto px-4 py-8">
           <div className="mb-8">
@@ -301,7 +270,6 @@ export default function AdminPage() {
             </div>
           )}
         </main>
-      </div>
-    </ProtectedRoute>
+    </div>
   )
 }

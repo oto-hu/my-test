@@ -1,7 +1,6 @@
 'use client'
 
 import Header from '../components/Header'
-import ProtectedRoute from '../components/ProtectedRoute'
 import { useState } from 'react'
 
 // ダミーの限定コンテンツデータ
@@ -69,9 +68,8 @@ export default function ContentPage() {
     : contentData.filter(item => item.category === selectedCategory)
 
   return (
-    <ProtectedRoute>
-      <div className="min-h-screen bg-gray-50">
-        <Header />
+    <div className="min-h-screen bg-gray-50">
+      <Header />
         
         <main className="container mx-auto px-4 py-8">
           <div className="mb-8">
@@ -200,7 +198,6 @@ export default function ContentPage() {
             </div>
           )}
         </main>
-      </div>
-    </ProtectedRoute>
+    </div>
   )
 }

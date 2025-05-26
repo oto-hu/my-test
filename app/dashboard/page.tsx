@@ -1,8 +1,6 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
 import Header from '../components/Header'
-import ProtectedRoute from '../components/ProtectedRoute'
 import Link from 'next/link'
 
 // ダミーデータ
@@ -39,22 +37,19 @@ const recentContent = [
 ]
 
 export default function Dashboard() {
-  const { data: session } = useSession()
-
   return (
-    <ProtectedRoute>
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-        
-        <main className="container mx-auto px-4 py-8">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">
-              {session?.user?.name}さん、こんにちは！
-            </h1>
-            <p className="text-gray-600">
-              プレミアムサロンメンバー限定サイトへようこそ
-            </p>
-          </div>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      
+      <main className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+            こんにちは！
+          </h1>
+          <p className="text-gray-600">
+            プレミアムサロンメンバー限定サイトへようこそ
+          </p>
+        </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
             {/* 最新のお知らせ */}
@@ -123,6 +118,5 @@ export default function Dashboard() {
           </div>
         </main>
       </div>
-    </ProtectedRoute>
   )
 }
