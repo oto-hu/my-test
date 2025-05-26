@@ -1,9 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useSession } from 'next-auth/react'
 import Header from '../components/Header'
-import ProtectedRoute from '../components/ProtectedRoute'
 
 // ダミーの掲示板データ
 const initialPosts = [
@@ -54,7 +52,6 @@ const initialPosts = [
 ]
 
 export default function BoardPage() {
-  const { data: session } = useSession()
   const [posts, setPosts] = useState(initialPosts)
   const [newPostTitle, setNewPostTitle] = useState('')
   const [newPostContent, setNewPostContent] = useState('')
@@ -69,7 +66,7 @@ export default function BoardPage() {
     const newPost = {
       id: posts.length + 1,
       title: newPostTitle,
-      author: session?.user?.name || 'Anonymous',
+      author: 'ゲストユーザー',
       date: new Date().toLocaleString('ja-JP'),
       content: newPostContent,
       replies: []
@@ -87,7 +84,7 @@ export default function BoardPage() {
 
     const reply = {
       id: Date.now(),
-      author: session?.user?.name || 'Anonymous',
+      author: 'ゲストユーザー',
       date: new Date().toLocaleString('ja-JP'),
       content: newReply
     }
@@ -104,9 +101,8 @@ export default function BoardPage() {
   }
 
   return (
-    <ProtectedRoute>
-      <div className="min-h-screen bg-gray-50">
-        <Header />
+    <div className="min-h-screen bg-gray-50">
+      <Header />
         
         <main className="container mx-auto px-4 py-8">
           <div className="mb-8">
@@ -267,7 +263,6 @@ export default function BoardPage() {
             </div>
           )}
         </main>
-      </div>
-    </ProtectedRoute>
+    </div>
   )
 }

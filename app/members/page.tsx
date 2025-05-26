@@ -1,7 +1,6 @@
 'use client'
 
 import Header from '../components/Header'
-import ProtectedRoute from '../components/ProtectedRoute'
 
 // ダミーのメンバーデータ
 const members = [
@@ -81,9 +80,8 @@ const members = [
 
 export default function MembersPage() {
   return (
-    <ProtectedRoute>
-      <div className="min-h-screen bg-gray-50">
-        <Header />
+    <div className="min-h-screen bg-gray-50">
+      <Header />
         
         <main className="container mx-auto px-4 py-8">
           <div className="mb-8">
@@ -148,7 +146,6 @@ export default function MembersPage() {
             </div>
           </div>
         </main>
-      </div>
-    </ProtectedRoute>
+    </div>
   )
 }

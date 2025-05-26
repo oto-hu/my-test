@@ -1,11 +1,9 @@
 'use client'
 
-import { useSession, signOut } from 'next-auth/react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 export default function Header() {
-  const { data: session } = useSession()
   const pathname = usePathname()
 
   const navItems = [
@@ -14,11 +12,8 @@ export default function Header() {
     { href: '/content', label: '限定コンテンツ' },
     { href: '/members', label: 'メンバー一覧' },
     { href: '/board', label: '掲示板' },
+    { href: '/admin', label: '管理画面' },
   ]
-
-  if (session?.user?.role === 'admin') {
-    navItems.push({ href: '/admin', label: '管理画面' })
-  }
 
   return (
     <header className="salon-header">
@@ -45,19 +40,8 @@ export default function Header() {
           
           <div className="flex items-center space-x-4">
             <span className="text-sm">
-              {session?.user?.name}さん
-              {session?.user?.role === 'admin' && (
-                <span className="ml-2 px-2 py-1 bg-yellow-400 text-purple-800 text-xs rounded-full">
-                  管理者
-                </span>
-              )}
+              ようこそ、サロンメンバーさん
             </span>
-            <button
-              onClick={() => signOut({ callbackUrl: '/login' })}
-              className="bg-white bg-opacity-20 hover:bg-opacity-30 px-4 py-2 rounded-lg transition-all"
-            >
-              ログアウト
-            </button>
           </div>
         </div>
       </div>

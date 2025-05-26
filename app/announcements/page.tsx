@@ -1,7 +1,6 @@
 'use client'
 
 import Header from '../components/Header'
-import ProtectedRoute from '../components/ProtectedRoute'
 import Link from 'next/link'
 
 // ダミーのお知らせデータ
@@ -66,48 +65,46 @@ const announcements = [
 
 export default function AnnouncementsPage() {
   return (
-    <ProtectedRoute>
-      <div className="min-h-screen bg-gray-50">
-        <Header />
-        
-        <main className="container mx-auto px-4 py-8">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-800 mb-2">お知らせ</h1>
-            <p className="text-gray-600">サロンからの最新情報をお届けします</p>
-          </div>
+    <div className="min-h-screen bg-gray-50">
+      <Header />
+      
+      <main className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <h1 className="text-3xl font-bold text-gray-800 mb-2">お知らせ</h1>
+          <p className="text-gray-600">サロンからの最新情報をお届けします</p>
+        </div>
 
-          <div className="space-y-6">
-            {announcements.map((announcement) => (
-              <div key={announcement.id} className="salon-card p-6">
-                <div className="flex items-start justify-between mb-4">
-                  <div>
-                    <div className="flex items-center space-x-3 mb-2">
-                      <span className={`px-3 py-1 text-xs rounded-full ${
-                        announcement.category === 'イベント' ? 'bg-green-100 text-green-700' :
-                        announcement.category === 'コンテンツ' ? 'bg-blue-100 text-blue-700' :
-                        'bg-gray-100 text-gray-700'
-                      }`}>
-                        {announcement.category}
-                      </span>
-                      <span className="text-sm text-gray-500">{announcement.date}</span>
-                    </div>
-                    <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                      {announcement.title}
-                    </h2>
-                    <p className="text-gray-600">{announcement.summary}</p>
+        <div className="space-y-6">
+          {announcements.map((announcement) => (
+            <div key={announcement.id} className="salon-card p-6">
+              <div className="flex items-start justify-between mb-4">
+                <div>
+                  <div className="flex items-center space-x-3 mb-2">
+                    <span className={`px-3 py-1 text-xs rounded-full ${
+                      announcement.category === 'イベント' ? 'bg-green-100 text-green-700' :
+                      announcement.category === 'コンテンツ' ? 'bg-blue-100 text-blue-700' :
+                      'bg-gray-100 text-gray-700'
+                    }`}>
+                      {announcement.category}
+                    </span>
+                    <span className="text-sm text-gray-500">{announcement.date}</span>
                   </div>
-                </div>
-                
-                <div className="mt-4 pt-4 border-t border-gray-200">
-                  <div className="whitespace-pre-line text-gray-700">
-                    {announcement.content}
-                  </div>
+                  <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                    {announcement.title}
+                  </h2>
+                  <p className="text-gray-600">{announcement.summary}</p>
                 </div>
               </div>
-            ))}
-          </div>
-        </main>
-      </div>
-    </ProtectedRoute>
+              
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <div className="whitespace-pre-line text-gray-700">
+                  {announcement.content}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </main>
+    </div>
   )
 }
